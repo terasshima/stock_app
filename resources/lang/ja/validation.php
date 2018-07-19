@@ -137,6 +137,8 @@ return [
         'password' => [
           'required' => ':attributeは必ず入力してください',
           'string' => '文字で入力してください',
+          'min' => 'パスワードは６文字以上で入力してください',
+          'confirmed' => '確認欄に入力された:attributeが一致しません'
         ],
     ],
 
