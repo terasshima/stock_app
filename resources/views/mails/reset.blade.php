@@ -69,5 +69,6 @@
         <p>
           {{ $actionText }}: <a href="{{ $actionUrl }}">{{ $actionUrl }}</a>
         </p>
+        <p>※このアドレスは送信用です！</p>
     </body>
 </html>
