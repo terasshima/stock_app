@@ -176,113 +176,114 @@
   </form>
   <br>
 
-<div class="text-nowrap">
-  <div class="table">
-    @if(count($investmentPrincipal) > 0)
+<div class="table-responsive">
+  <div class="text-nowrap">
+    <div class="table">
+      @if(count($investmentPrincipal) > 0)
+        <div class="table-row">
+          <div class="table-item-name" style="border-right:0px;">
+            投資元本
+          </div>
+          <div class="table-item-name-blind">
+            .
+          </div>
+        </div>
+        <div class="table-row">
+          <div class="table-item-number">
+            @foreach($investmentPrincipal as $principal)
+              {{number_format($principal->principal)}}
+            @endforeach
+          </div>
+          <div class="delete">
+            <form action="/make/principal/{{$principal->id}}" method="POST">
+                {{ csrf_field() }}
+                {{ method_field('DELETE') }}
+
+              <button type="submit" class="btn btn-danger">
+                  <i class="fa fa-trash"></i>削除
+              </button>
+            </form>
+          </div>
+        </div>
+      @endif
+
+    @if(count($items) > 0)
       <div class="table-row">
-        <div class="table-item-name" style="border-right:0px;">
-          投資元本
+        <div class="table-item-name">
+          証券コード
+        </div>
+        <div class="table-item-name" style="border-left:0px;">
+          銘柄名
+        </div>
+        <div class="table-item-name" style="border-left:0px;">
+          保有数
+        </div>
+        <div class="table-item-name" style="border-left:0px; border-right:0px;">
+          平均取得単価
         </div>
         <div class="table-item-name-blind">
           .
         </div>
       </div>
+      @foreach ($items as $item)
       <div class="table-row">
         <div class="table-item-number">
-          @foreach($investmentPrincipal as $principal)
-            {{number_format($principal->principal)}}
-          @endforeach
+            {{$item->stock_code}}
         </div>
-        <div class="delete">
-          <form action="/make/principal/{{$principal->id}}" method="POST">
-              {{ csrf_field() }}
-              {{ method_field('DELETE') }}
-
-            <button type="submit" class="btn btn-danger">
-                <i class="fa fa-trash"></i>削除
-            </button>
-          </form>
-        </div>
-      </div>
-    @endif
-
-  @if(count($items) > 0)
-    <div class="table-row">
-      <div class="table-item-name">
-        証券コード
-      </div>
-      <div class="table-item-name" style="border-left:0px;">
-        銘柄名
-      </div>
-      <div class="table-item-name" style="border-left:0px;">
-        保有数
-      </div>
-      <div class="table-item-name" style="border-left:0px; border-right:0px;">
-        平均取得単価
-      </div>
-      <div class="table-item-name-blind">
-        .
-      </div>
-    </div>
-    @foreach ($items as $item)
-    <div class="table-row">
-      <div class="table-item-number">
-          {{$item->stock_code}}
-      </div>
-      <div class="table-item-number">
-          {{$item->company_name}}
-      </div>
-      <div class="table-item-number">
-          {{number_format($item->holding_number)}}
-      </div>
-      <div class="table-item-number">
-          {{number_format($item->average_price)}}
-      </div>
-      <div class="delete">
-        <form action="/make/{{$item->id}}" method="POST">
-					{{ csrf_field() }}
-			    {{ method_field('DELETE') }}
-
-				<button type="submit" class="btn btn-danger">
-						<i class="fa fa-trash"></i>削除
-				</button>
-					</form>
-      </div>
-    </div>
-    @endforeach
-    @endif
-
-    @if (count($cashPosition) > 0)
-      <div class="table-row">
-        <div class="table-item-name" style="border-right:0px;">
-          現金(CP)
-        </div>
-        <div class="table-item-name-blind">
-          .
-        </div>
-      </div>
-
-      @foreach($cashPosition as $cash)
-      <div class="table-row">
         <div class="table-item-number">
-          {{number_format($cash->cash)}}
+            {{$item->company_name}}
+        </div>
+        <div class="table-item-number">
+            {{number_format($item->holding_number)}}
+        </div>
+        <div class="table-item-number">
+            {{number_format($item->average_price)}}
         </div>
         <div class="delete">
-          <form action="/make/cash/{{$cash->id}}" method="POST">
-    					{{ csrf_field() }}
-    			    {{ method_field('DELETE') }}
+          <form action="/make/{{$item->id}}" method="POST">
+  					{{ csrf_field() }}
+  			    {{ method_field('DELETE') }}
 
-    				<button type="submit" class="btn btn-danger">
-    						<i class="fa fa-trash"></i>削除
-    				</button>
-    			</form>
+  				<button type="submit" class="btn btn-danger">
+  						<i class="fa fa-trash"></i>削除
+  				</button>
+  					</form>
         </div>
       </div>
       @endforeach
-    @endif
+      @endif
+
+      @if (count($cashPosition) > 0)
+        <div class="table-row">
+          <div class="table-item-name" style="border-right:0px;">
+            現金(CP)
+          </div>
+          <div class="table-item-name-blind">
+            .
+          </div>
+        </div>
+
+        @foreach($cashPosition as $cash)
+        <div class="table-row">
+          <div class="table-item-number">
+            {{number_format($cash->cash)}}
+          </div>
+          <div class="delete">
+            <form action="/make/cash/{{$cash->id}}" method="POST">
+      					{{ csrf_field() }}
+      			    {{ method_field('DELETE') }}
+
+      				<button type="submit" class="btn btn-danger">
+      						<i class="fa fa-trash"></i>削除
+      				</button>
+      			</form>
+          </div>
+        </div>
+        @endforeach
+      @endif
+    </div>
   </div>
 </div>
-
       <form action="/view" method="POST">
         {{ csrf_field() }}
         <input class="btn-custom" type="submit" value="ポートフォリオ作成">

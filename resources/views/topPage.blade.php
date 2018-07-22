@@ -33,7 +33,7 @@
 	<div id="hello">
 	    <div class="container">
 	    	<div class="row">
-	    		<div class="col-lg-8 col-lg-offset-2 centered">
+	    		<div class="col-lg-12 col-xs-12 centered">
 	    			<h1>Portfolio Viewer</h1>
 	    			<h2>あなたの株式ポートフォリオを見える化しませんか？</h2>
 	    		</div><!-- /col-lg-8 -->
@@ -44,18 +44,20 @@
       @guest
 
       @else
+      <br>
       <div class="row centered">
-        <div class="a-conf">
+        <div class="col-lg-4 col-lg-offset-1 col-md-4 col-md-offset-1" style="padding:5px;">
           <a href="/view" class="btn btn-primary">ポートフォリオ一覧ページ</a>
+        </div>
 
+        <div class="col-lg-4 col-lg-offset-2 col-md-4 col-md-offset-2" style="padding:5px;">
           <a href="/make" class="btn btn-primary">ポートフォリオ作成ページ</a>
         </div>
-          <br>
-          <br>
+        <br>
 
         <form action="/logout" method="post">
           {{ csrf_field() }}
-          <input class="btn btn-primary" type="submit" value="ログアウト">
+          <input class="btn logout" type="submit" value="ログアウト">
         </form>
 
       </div>
@@ -66,11 +68,11 @@
 	<div id="green">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-5 centered">
+				<div class="col-lg-5 col-md-5 col-sm-6 centered">
 					<img src="img/computer_pc_PNG17485.png" alt="">
 				</div>
 
-				<div class="col-lg-7 centered">
+				<div class="col-lg-7 col-md-7 col-sm-6 centered">
 					<h3>ポートフォリオ、管理出来てますか？</h3>
           <p>あなたはポートフォリオをどのように管理しているでしょうか？
           <br>私たちはあなたのポートフォリオを図式化し、一目で保有株式の割合がわかるようなサービスを提供します</p>
@@ -86,15 +88,15 @@
   <div id="skills">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-5 centered col-md-5 centered">
+				<div class="col-lg-6 col-md-6 col-sm-6 centered">
           <h2>例えばこんな風に</h2>
           <br>
           <p>私たちは株価を30分ごとに自動取得し、グラフを作成します。
             また、投資元本も入力いただくことで、どれほど資産が増えたのかも把握することも出来ます。</p>
 				</div>
 
-				<div class="col-sm-7 centered col-md-7 centered">
-            <canvas id="index" height="65" width="125" margin-right="190px"></canvas>
+				<div class="col-lg-6 col-md-6 col-sm-6 centered">
+            <canvas id="index" height="80%" width="120%" margin-right="190px"></canvas>
           <script>
 
           window.onload = function() {
@@ -139,16 +141,16 @@
 
 
 @guest
-	<section id="contact"></section>
 	<div id="social">
 		<div class="container">
 			<div class="row centered">
 
 				<h1>さあ、はじめてみましょう！</h1>
         <div class="a-conf">
-          <a href="/login" class="btn btn-primary">ログイン<span class="balloon">既に会員登録された方はこちら！</span></a>
+          <a href="/login" class="btn btn-primary">ログイン</a>
 
-          <a href="/register" class="btn btn-primary">会員登録<span class="balloon"><span>まだ会員登録されていない方はこちら！</span></a>
+
+          <a href="/register" class="btn btn-primary">会員登録</a>
         </div>
 
       </div>

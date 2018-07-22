@@ -55,8 +55,18 @@ p {
 }
 
 .logout {
-  font-size: 20px;
-  font-weight: bold;
+  color: #ffffff;
+  background-color: #74cfae;
+  border-color: #357ebd;
+  position: relative;
+  top: 90px;
+}
+
+.logout:hover  {
+  color: #ffffff;
+  background-color: #32cde5;
+  border-color: #285e8e;
+  display: inline-block;
 }
 
 
@@ -150,13 +160,14 @@ a:after {
 }
 
 #hello h1 {
-	font-size: 90px;
+	font-size: 85px;
 	font-weight: 700;
 	letter-spacing: 3px;
 	color: #74cfae;
 }
 
 #hello h2 {
+  font-size: 25px;
 	color: #c0c0c0;
 	font-weight: 400;
 }
@@ -207,6 +218,10 @@ a:after {
 	width: 100%;
 	padding-top: 150px;
 	padding-bottom: 150px;
+}
+
+#social h1 {
+  font-size: 30px;
 }
 
 #social a {
