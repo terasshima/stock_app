@@ -26,7 +26,11 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=your/gmail/address
 MAIL_FROM_NAME="Portfolio Viewer"
 ```
-
+```
+$ cd your/project
+$ php artisan serve
+```
+これでローカルサーバーが立ち上がり、ローカル環境でアプリの使用が出来ます。
 
 ## Licence
 
