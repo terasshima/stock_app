@@ -41,7 +41,6 @@ Route::delete('make/cash/{bill}', 'MakeController@deleteCash');
 Route::post('view', 'MakeController@post');
 
 
-
 Route::auth();
 
 
