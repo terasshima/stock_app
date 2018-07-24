@@ -9,11 +9,13 @@
 また、東京証券取引所に上場している企業のみポートフォリオに組めませんが、株価を30分毎に自動取得出来ます。
 
 ## Usage
+composerインストール、.envファイル作成、アプリケーションキー初期化
 ```
-$ cd your/project 
+$ cd your/project
 $ git clone git@github.com:hiroaki510/stock_app.git
+$ composer install
 $ cp .env.example .env
-$ open .env
+$ php artisan key:generate
 ```
 .envファイルを以下に変更
 ```
@@ -26,17 +28,20 @@ MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=your/gmail/address
 MAIL_FROM_NAME="Portfolio Viewer"
 ```
+データベースファイルの作成
+```
+$ cd your/project/database
+$ ls -a
+factories migrations seeds .gitignore
+$ touch database.sqlite
+```
+マイグレーション
+```
+$ cd your/project
+$ php artisan migrate
+```
+これでローカルサーバーが立ち上がり、ローカル環境でアプリの使用が出来ます。
 ```
 $ cd your/project
 $ php artisan serve
 ```
-これでローカルサーバーが立ち上がり、ローカル環境でアプリの使用が出来ます。
-
-## Licence
-
-[MIT](https://github.com/tcnksm/tool/blob/master/LICENCE)
-
-## Author
-
-[tcnksm](https://github.com/tcnksm)
-
