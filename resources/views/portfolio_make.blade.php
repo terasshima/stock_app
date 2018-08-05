@@ -2,7 +2,6 @@
 <!-- 会員登録後のイメージ図。初めてログインしてもらった人に銘柄等入力してもらう !-->
 @section('content')
   <h3>ポートフォリオ情報を入力してください！</h3>
-  <span class="attention">※名証、札証、福証に単独上場している企業はポートフォリオに組めません</span>
   <br>
   <br>
 
@@ -78,6 +77,26 @@
             <input class="form-control{{ $errors->has('stock_code') ? ' is-invalid' : '' }}" type="text" name="stock_code" value="{{old('stock_code')}}">
           </div>
         </div>
+
+      <div class="error-msg">
+        @if($errors->has('stock_price'))
+        <br>
+        {{$errors->first('stock_price')}}
+        <br>
+        @endif
+      </div>
+
+      <div class="row">
+        <div class="col-xs-1">
+          <span class="item">株価:</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <input class="form-control{{ $errors->has('stock_price') ? ' is-invalid' : '' }}" type="text" name="stock_price" value="{{old('stock_price')}}">
+        </div>
+      </div>
+
 
       <div class="error-msg">
         @if($errors->has('company_name'))
@@ -213,6 +232,9 @@
           証券コード
         </div>
         <div class="table-item-name" style="border-left:0px;">
+          株価
+        </div>
+        <div class="table-item-name" style="border-left:0px;">
           銘柄名
         </div>
         <div class="table-item-name" style="border-left:0px;">
@@ -229,6 +251,9 @@
       <div class="table-row">
         <div class="table-item-number">
             {{$item->stock_code}}
+        </div>
+        <div class="table-item-number">
+            {{number_format($item->stock_price)}}
         </div>
         <div class="table-item-number">
             {{$item->company_name}}

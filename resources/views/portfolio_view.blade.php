@@ -15,23 +15,13 @@
 
 <script>
 var portfolio = <?php
-    function getStockPrice($code){
-      $url = "https://www.google.com/finance/getprices?&x=TYO&i=1800&p=2d&f=c&q=$code";
-      $ch = curl_init();
-      curl_setopt($ch, CURLOPT_URL, $url);
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      $html =  curl_exec($ch);
-      curl_close($ch);
-
-      $stockPrice = explode("\n", $html);
-      return current(array_slice($stockPrice, -2, 1, true));
-    }
-
   $items_decode = json_decode($items, true);
 
-  for ($i=0; $i < count($items_decode); $i++) {
+/*  for ($i=0; $i < count($items_decode); $i++) {
     $items_decode[$i] = array_merge($items_decode[$i], array('price' => getStockPrice($items_decode[$i]['stock_code'])));
   }
+  */
+
   //株価などのDBをJSON形式に整形
   $portfolio = json_encode($items_decode,JSON_UNESCAPED_UNICODE|JSON_NUMERIC_CHECK);
   echo $portfolio;
@@ -40,15 +30,15 @@ var portfolio = <?php
   //グラフを評価額順に時計回りに配置したいので、降順でソート
      function compare( a, b ){
       var r = 0;
-      if( a.price * a.holding_number < b.price * b.holding_number ){
+      if( a.stock_price * a.holding_number < b.stock_price * b.holding_number ){
          r = -1;
        }
-      else if( a.price * a.holding_number > b.price * b.holding_number ){
+      else if( a.stock_price * a.holding_number > b.stock_price * b.holding_number ){
          r = 1;
        }
       return ( -1 * r );
     }
-  　portfolio.sort(compare);
+  portfolio.sort(compare);
 
   //Chart.jsのdataにセットするため、企業名と評価額を配列に入れ込む
   var portfolioName = [];
@@ -58,7 +48,7 @@ var portfolio = <?php
 
   var portfolioPrice = [];
   for (var i = 0; i < portfolio.length; i++) {
-    portfolioPrice.push(portfolio[i].price * portfolio[i].holding_number);
+    portfolioPrice.push(portfolio[i].stock_price * portfolio[i].holding_number);
   }
 
   //現金CPをlabelsの最後尾に追加
@@ -121,11 +111,10 @@ var portfolio = <?php
 
 </script>
 
-
     @php
     $portfolio_dec = json_decode($portfolio, true);
     foreach ($portfolio_dec as $key => $value) {
-      $sort[$key] = $value['holding_number'] * $value['price'];
+      $sort[$key] = $value['holding_number'] * $value['stock_price'];
     }
     array_multisort($sort, SORT_DESC, $portfolio_dec);
 
@@ -147,14 +136,14 @@ var portfolio = <?php
           <tr>
             <td>{{$item['stock_code']}}</td>
             <td>{{$item['company_name']}}</td>
-            <td>{{number_format($item['price'])}}</td>
+            <td>{{number_format($item['stock_price'])}}</td>
             <td>{{number_format($item['holding_number'])}}</td>
             <td>{{number_format($item['average_price'])}}</td>
-            <td>{{number_format($item['price'] * $item['holding_number'])}}</td>
-            @if(floor($item['price'] / $item['average_price'] * 100) - 100 < 0)
-              <td class="deficit">{{number_format(floor($item['price'] / $item['average_price'] * 100) - 100)}}%</td>
+            <td>{{number_format($item['stock_price'] * $item['holding_number'])}}</td>
+            @if(floor($item['stock_price'] / $item['average_price'] * 100) - 100 < 0)
+              <td class="deficit">{{number_format(floor($item['stock_price'] / $item['average_price'] * 100) - 100)}}%</td>
             @else
-              <td class="the-black">{{number_format(floor($item['price'] / $item['average_price'] * 100) - 100)}}%</td>
+              <td class="the-black">{{number_format(floor($item['stock_price'] / $item['average_price'] * 100) - 100)}}%</td>
             @endif
           </tr>
           @endforeach
@@ -187,7 +176,7 @@ var portfolio = <?php
             @php
               $totalValuation = 0;
               for($i=0; $i < count($portfolio_dec); $i++){
-                $totalValuation += $portfolio_dec[$i]['price'] * $portfolio_dec[$i]['holding_number'];
+                $totalValuation += $portfolio_dec[$i]['stock_price'] * $portfolio_dec[$i]['holding_number'];
               }
             @endphp
             <td>{{number_format($totalValuation + $cashPosition)}}</td>

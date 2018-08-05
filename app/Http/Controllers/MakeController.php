@@ -35,6 +35,7 @@ class MakeController extends Controller
       $stock = new Stock;
       $stock->user_id = $request->user()->id;
       $stock->stock_code = $request->stock_code;
+      $stock->stock_price = $request->stock_price;
       $stock->company_name = $request->company_name;
       $stock->holding_number = $request->holding_number;
       $stock->average_price = $request->average_price;

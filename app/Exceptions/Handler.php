@@ -62,6 +62,6 @@ class Handler extends ExceptionHandler
           return response()->view('errors.500');
         }
 
-  //  return parent::render($request, $exception);
+    //    return parent::render($request, $exception);
     }
 }

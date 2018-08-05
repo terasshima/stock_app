@@ -32,9 +32,14 @@ class addStockRequest extends FormRequest
                 'filled',
                 'integer',
                 'digits:4',
-                'get_stock_price',
                 Rule::unique('stocks')->where(function ($query) {
                   return $query->where('user_id', $this->user()->id); }),
+              ],
+          'stock_price' => [
+                'filled',
+                'integer',
+                'min:1',
+                'max:1000000'
               ],
           'company_name' => [
                 'filled',
@@ -63,8 +68,12 @@ class addStockRequest extends FormRequest
         'stock_code.filled' => '入力してください！',
         'stock_code.integer' => '整数を(半角で)入力してください！',
         'stock_code.digits' => '4桁の数字を入力してください！',
-        'stock_code.get_stock_price' => 'その証券コードは読み取れません！誤っているか、名証・札証・福証のいずれかに単独上場しています。',
         'stock_code.unique' => 'その証券コードは既に入力されています！',
+
+        'stock_price.filled' => '入力してください！',
+        'stock_price.integer' => '整数を(半角で)入力してください！',
+        'stock_price.min' => '1以上の数字を入力してください！',
+        'stock_price.max' => '桁数が大きすぎます！',
 
         'company_name.filled' => '入力してください！',
         'company_name.string' => '文字を入力してください！',
