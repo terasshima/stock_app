@@ -78,25 +78,6 @@
           </div>
         </div>
 
-      <div class="error-msg">
-        @if($errors->has('stock_price'))
-        <br>
-        {{$errors->first('stock_price')}}
-        <br>
-        @endif
-      </div>
-
-      <div class="row">
-        <div class="col-xs-1">
-          <span class="item">株価:</span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-9">
-          <input class="form-control{{ $errors->has('stock_price') ? ' is-invalid' : '' }}" type="text" name="stock_price" value="{{old('stock_price')}}">
-        </div>
-      </div>
-
 
       <div class="error-msg">
         @if($errors->has('company_name'))
@@ -114,6 +95,25 @@
       <div class="row">
         <div class="col-md-9">
           <input class="form-control{{ $errors->has('company_name') ? ' is-invalid' : '' }}" type="text" name="company_name" value="{{old('company_name')}}">
+        </div>
+      </div>
+
+      <div class="error-msg">
+        @if($errors->has('stock_price'))
+        <br>
+        {{$errors->first('stock_price')}}
+        <br>
+        @endif
+      </div>
+
+      <div class="row">
+        <div class="col-xs-1">
+          <span class="item">株価:</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-9">
+          <input class="form-control{{ $errors->has('stock_price') ? ' is-invalid' : '' }}" type="text" name="stock_price" value="{{old('stock_price')}}">
         </div>
       </div>
 
@@ -232,10 +232,10 @@
           証券コード
         </div>
         <div class="table-item-name" style="border-left:0px;">
-          株価
+          銘柄名
         </div>
         <div class="table-item-name" style="border-left:0px;">
-          銘柄名
+          株価
         </div>
         <div class="table-item-name" style="border-left:0px;">
           保有数
@@ -253,10 +253,10 @@
             {{$item->stock_code}}
         </div>
         <div class="table-item-number">
-            {{number_format($item->stock_price)}}
+            {{$item->company_name}}
         </div>
         <div class="table-item-number">
-            {{$item->company_name}}
+            {{number_format($item->stock_price)}}
         </div>
         <div class="table-item-number">
             {{number_format($item->holding_number)}}
