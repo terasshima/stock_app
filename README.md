@@ -13,6 +13,7 @@ composerインストール、.envファイル作成、アプリケーション�
 ```
 $ cd your/project
 $ git clone git@github.com:hiroaki510/stock_app.git
+//Composerをインストールしてから
 $ composer install
 $ cp .env.example .env
 $ php artisan key:generate
@@ -30,7 +31,7 @@ MAIL_FROM_NAME="Portfolio Viewer"
 ```
 データベースファイルの作成
 ```
-$ cd your/project/database
+$ cd database
 $ ls -a
 factories migrations seeds .gitignore
 $ touch database.sqlite
