@@ -39,6 +39,15 @@ return [
             'prefix' => '',
         ],
 
+        'testing' => [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => '',
+            'options' => [
+                PDO::ATTR_PERSISTENT => true,
+            ],
+        ],
+
         'mysql' => [
             'driver' => 'mysql',
             'host' => env('DB_HOST', '127.0.0.1'),
