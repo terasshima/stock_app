@@ -17,6 +17,7 @@ $ git clone git@github.com:hiroaki510/stock_app.git
 $ composer install
 $ cp .env.example .env
 $ php artisan key:generate
+$ php artisan key:generate --env=testing
 ```
 .envファイルを以下に変更
 ```
