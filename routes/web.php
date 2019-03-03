@@ -40,6 +40,11 @@ Route::delete('make/cash/{bill}', 'MakeController@deleteCash');
 
 Route::post('view', 'MakeController@post');
 
+Route::get('ajaxtest', 'AjaxTestController@index');
+
+Route::post('ajaxtest/aaa', 'AjaxTestController@ajaxTest');
+
+Route::get('ajaxtest', 'AjaxTestController@printTest');
 
 Route::auth();
 
